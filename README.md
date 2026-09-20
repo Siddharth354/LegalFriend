@@ -22,7 +22,6 @@
 </p>
 
 <p align="center">
-  <a href="#built-at-sarvam-epoch-buildathon">Buildathon</a> •
   <a href="#product-tour">Product Tour</a> •
   <a href="#architecture">Architecture</a> •
   <a href="#stack">Stack</a> •
