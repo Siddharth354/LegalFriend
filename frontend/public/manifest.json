@@ -1,0 +1,9 @@
+{
+  "name": "Nyaya-Dost",
+  "short_name": "Nyaya-Dost",
+  "description": "A voice-first legal first-responder.",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "start_url": "/"
+}

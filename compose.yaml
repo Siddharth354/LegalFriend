@@ -1,0 +1,84 @@
+name: legalfriend
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        DENSE_MODEL_DTYPE: float32
+        DENSE_MODEL_NAME: ${DENSE_MODEL_NAME:-sentence-transformers/all-MiniLM-L6-v2}
+    env_file:
+      - backend/.env
+    environment:
+      ENV: dev
+      DENSE_MODEL_DTYPE: float32
+      DENSE_MODEL_NAME: ${DENSE_MODEL_NAME:-sentence-transformers/all-MiniLM-L6-v2}
+      QDRANT_PATH: /app/legal-corpus/qdrant_data
+      CHUNKS_DIR: /app/legal-corpus/chunks
+      SQLITE_PATH: /app/data/legalfriend.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_data:/app/data
+      - qdrant_data:/app/legal-corpus/qdrant_data
+      - model_cache:/app/model-cache
+    healthcheck:
+      test:
+        - CMD
+        - /usr/bin/python3
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:8000/readyz', timeout=5)
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 120s
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    tmpfs:
+      - /tmp:mode=1777,size=64m
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - /nodejs/bin/node
+        - -e
+        - "require('http').get('http://localhost:3000/', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    tmpfs:
+      - /tmp:mode=1777,size=32m
+
+volumes:
+  backend_data:
+  model_cache:
+  qdrant_data:

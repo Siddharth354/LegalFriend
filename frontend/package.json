@@ -1,0 +1,29 @@
+{
+  "name": "legalfriend-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "biome check src package.json next.config.ts postcss.config.mjs biome.json tsconfig.json && tsc --noEmit",
+    "format": "biome format --write ."
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "next": "16.2.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "4.3.3",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.5",
+    "@types/node": "24.3.0",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}
