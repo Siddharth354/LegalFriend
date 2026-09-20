@@ -18,7 +18,6 @@
   <img src="https://img.shields.io/badge/Next.js-16-black?style=flat" alt="Next.js 16">
   <img src="https://img.shields.io/badge/LangGraph-multi--agent-orange?style=flat" alt="LangGraph multi-agent">
   <img src="https://img.shields.io/badge/voice-Sarvam%20AI-purple?style=flat" alt="Voice: Sarvam AI">
-  <img src="https://img.shields.io/badge/built%20for-Sarvam%20Epoch%20Buildathon-green?style=flat" alt="Sarvam Epoch Buildathon">
 </p>
 
 <p align="center">
