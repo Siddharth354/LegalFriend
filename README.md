@@ -61,7 +61,7 @@ The final answer is translated and spoken back via Sarvam TTS, chunked to respec
 
 ## Stack
 
-### Backend — Subrata Mondal
+### Backend
 
 | Layer | Technology |
 |---|---|
@@ -71,7 +71,7 @@ The final answer is translated and spoken back via Sarvam TTS, chunked to respec
 | API | FastAPI (Python 3.12), Server-Sent Events streaming |
 | Deployment | Docker Compose — distroless, non-root, read-only container filesystems |
 
-### Frontend — Madhu Shigli
+### Frontend
 
 | Layer | Technology |
 |---|---|
